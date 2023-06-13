@@ -11,21 +11,24 @@
 
 /*int widht = 20, lenght = 20;
 
-int fruitX = rand() % widht, fruitY = rand() % lenght;
+
 int TailX[20], TailY[20];
 int score = 0;
 char a;
 char snake[100];*/
-
-void player();
 using namespace std;
 enum dir {start,UP,DOWN, RIGHT,LEFT };
 dir direction = start;
-bool gameOver = false;
 
+//enum checkdir { up, down, right, left };
+int checkX, checkXX, checkY, checkYY;
+
+int score = 0;
+
+bool gameOver = false;
 int wight = 20, lenght = 20;
 int x = wight / 2, y = lenght / 2;
-
+int fruitX = rand() % wight, fruitY = rand() % lenght;
 HANDLE hand = GetStdHandle(STD_OUTPUT_HANDLE);
 
 enum Color {
@@ -52,12 +55,12 @@ void draw()
     SetConsoleTextAttribute(hand, LightYellow);
     vector<vector<char>> world;
 
-    for (size_t i = 0; i < wight; i++)
+    for (size_t x = 0; x < wight; x++)
     {
         vector<char> vec;
-        for (size_t j = 0; j < lenght; j++)
+        for (size_t y = 0; y < lenght; y++)
         {
-            if (i == 0 || i == wight -1 || j == 0 || j == lenght -1)
+            if (x == 0 || x == wight -1 || y == 0 || y == lenght -1)
             {
                 vec.push_back(254);
             }
@@ -65,7 +68,6 @@ void draw()
             {
                 vec.push_back(' ');
             }
-            
         }
         world.push_back(vec);
     }
@@ -79,50 +81,63 @@ void draw()
 
                 exit(0);
             }
-            
-            if (i == y && j == x)
+            else if (i == y && j == x)
             {
                 SetConsoleTextAttribute(hand, Red);
                 cout << '#';
                 SetConsoleTextAttribute(hand, LightYellow);
-
-
-
             }
-        
+            else if (i == fruitY && j == fruitX)
+            {
+                SetConsoleTextAttribute(hand, Red);
+                cout << '&';
+                SetConsoleTextAttribute(hand, LightYellow);
+            }
             else
             {
                 cout << world[i][j];
             }
-            
         }
-
-        
-        cout << endl;
-
-        
+        cout << endl;   
     }
+    cout << "Score: " << score;
     Sleep(200);
 }
 
 
 void player()
-{   
+{
     if (_kbhit())
     {
         switch (_getch())
         {
         case 'w':
             direction = UP;
+            checkY = 2;
+
+            checkX = 0;
+            checkXX = 0;
             break;
         case 's':
             direction = DOWN;
+            checkYY = 1;
+
+            checkX = 0;
+            checkXX = 0;
             break;
         case 'd':
             direction = RIGHT;
+            checkX = 2;
+
+            checkY = 0;
+            checkYY = 0;
             break;
         case 'a':
             direction = LEFT;
+            checkXX = 1;
+
+            checkY = 0;
+            checkYY = 0;
             break;
         case 'x':
             gameOver = true;
@@ -150,4 +165,35 @@ void control()
     default:
         break;
     }
+}
+
+void checkControl()
+{
+    if (direction == DOWN && checkY == 2)
+    {
+        exit(0);
+    }
+    else if (direction == UP && checkYY == 1)
+    {
+        exit(0);
+    }
+    else if (direction == LEFT && checkX == 2)
+    {
+        exit(0);
+    }
+    else if (direction == RIGHT && checkXX == 1)
+    {
+        exit(0);
+    }
+}
+
+void fruit() {
+
+    if (fruitX == x && fruitY == y)
+    {
+        score += 10;
+        fruitX = rand() % (wight-2) +1;
+        fruitY = rand() % (lenght-2) +1;
+    }
+
 }
