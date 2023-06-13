@@ -12,5 +12,6 @@ void main()
 		
 		system("cls");
 	}
+	cout << "Hello World" << endl;
 	
 }
