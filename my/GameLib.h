@@ -7,6 +7,7 @@
 #include <time.h> 
 #include <string> 
 #include <conio.h>
+#include <fstream>
 
 
 /*int widht = 20, lenght = 20;
@@ -16,17 +17,17 @@ int TailX[20], TailY[20];
 int score = 0;
 char a;
 char snake[100];*/
+
 using namespace std;
 enum dir {start,UP,DOWN, RIGHT,LEFT };
 dir direction = start;
 
-//enum checkdir { up, down, right, left };
 int checkX, checkXX, checkY, checkYY;
 
 int score = 0;
 
-bool gameOver = false;
-int wight = 20, lenght = 20;
+//bool gameOver = false;
+int wight = 25, lenght = 25;
 int x = wight / 2, y = lenght / 2;
 int fruitX = rand() % wight, fruitY = rand() % lenght;
 HANDLE hand = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -50,6 +51,13 @@ enum Color {
     White = 15,
 };
 
+void gameOver()
+{
+    SetConsoleTextAttribute(hand, Red);
+    cout << "You Lose!\n" << endl;
+    cout << "Your Score: " << score << endl;
+    exit(0);
+}
 void draw()
 {
     SetConsoleTextAttribute(hand, LightYellow);
@@ -77,9 +85,8 @@ void draw()
         {
             if (x == 0 || x == wight - 1 || y == 0 || y == lenght - 1)
             {
-                cout << "YOU LOSE!";
+                gameOver();
 
-                exit(0);
             }
             else if (i == y && j == x)
             {
@@ -140,7 +147,7 @@ void player()
             checkYY = 0;
             break;
         case 'x':
-            gameOver = true;
+            gameOver();
         default:
             break;
         }
@@ -171,19 +178,19 @@ void checkControl()
 {
     if (direction == DOWN && checkY == 2)
     {
-        exit(0);
+        gameOver();
     }
     else if (direction == UP && checkYY == 1)
     {
-        exit(0);
+        gameOver();
     }
     else if (direction == LEFT && checkX == 2)
     {
-        exit(0);
+        gameOver();
     }
     else if (direction == RIGHT && checkXX == 1)
     {
-        exit(0);
+        gameOver();
     }
 }
 
@@ -196,4 +203,10 @@ void fruit() {
         fruitY = rand() % (lenght-2) +1;
     }
 
+}
+
+void file()
+{
+    ofstream on;
+    on.open("BestScore.bs");
 }

@@ -3,7 +3,7 @@
 void main()
 {
 	srand(time(NULL));
-	while (!gameOver)
+	/*while (true)
 	{
 		player();
 		checkControl();
@@ -11,5 +11,7 @@ void main()
 		draw();
 		fruit();
 		system("cls");
-	}	
+	}*/
+	file();
+	//cout << "YOU LOSE!" << endl;
 }
