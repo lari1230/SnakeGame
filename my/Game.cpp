@@ -12,6 +12,5 @@ void main()
 		fruit();
 		system("cls");
 	}*/
-	file();
 	//cout << "YOU LOSE!" << endl;
 }

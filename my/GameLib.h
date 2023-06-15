@@ -205,8 +205,79 @@ void fruit() {
 
 }
 
+//void shifr(int Score, int type)
+//{
+//    string locScore = to_string(Score);
+//    if (type == 1)
+//    {
+//        string shifrTemp = "";
+//        for (size_t i = 0; i < locScore.size(); i++)
+//        {
+//            switch (locScore[i])
+//            {
+//            case '1':
+//                shifrTemp += "qwe]";
+//                break;
+//            case '2':
+//                shifrTemp += "poi?";
+//                break;
+//            case '3':
+//                shifrTemp += "glh|";
+//                break;
+//            case '4':
+//                shifrTemp += "bcv]";
+//                break;
+//            case '5':
+//                shifrTemp += "tiy[";
+//                break;
+//            case '6':
+//                shifrTemp += "asdh?";
+//                break;
+//            case '7':
+//                shifrTemp += "klf.";
+//                break;
+//            case '8':
+//                shifrTemp += "gyudfe.";
+//                break;
+//            case '9':
+//                shifrTemp += "eryt}";
+//                break;
+//            case '0':
+//                shifrTemp += "oiqweq{";
+//                break;
+//            }
+//        }
+//        ofstream on;
+//        on.open("BestScore.bs");
+//        on << shifrTemp;
+//    }
+//    else if (type == 2)
+//    {
+//        ifstream in;
+//        in.open("BestScore.bs");
+//        if (in.is_open())
+//        {
+//            string temp, str,num;
+//            getline(in, str);
+//            for (size_t i = 0; i < str.size(); i++)
+//            {
+//                
+//                if (str[i] == '[' || str[i] == ']' || str[i] == '{' || str[i] == '}' || str[i] == '|' || str[i] == '.' || str[i] == ',' || str[i] == '?')
+//                {
+//                       
+//                }
+//                else
+//                {
+//                    temp += str[i];
+//                }
+//            }
+//        }
+//    }
+//}
 void file()
 {
     ofstream on;
-    on.open("BestScore.bs");
+    on.open("BestScore.bs", ios::app);
+   
+
 }
