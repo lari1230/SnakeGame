@@ -10,13 +10,8 @@
 #include <fstream>
 
 
-/*int widht = 20, lenght = 20;
-
-
-int TailX[20], TailY[20];
-int score = 0;
-char a;
-char snake[100];*/
+int tailx[100], taily[100];
+int nTail;
 
 using namespace std;
 enum dir {start,UP,DOWN, RIGHT,LEFT };
@@ -28,7 +23,7 @@ int score = 0;
 int bScore;
 
 
-int wight = 25, lenght = 25;
+const int wight = 20, lenght = 20;
 int x = wight / 2, y = lenght / 2;
 int fruitX = rand() % wight, fruitY = rand() % lenght;
 HANDLE hand = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -69,7 +64,7 @@ void draw()
         vector<char> vec;
         for (size_t y = 0; y < lenght; y++)
         {
-            if (x == 0 || x == wight -1 || y == 0 || y == lenght -1)
+            if (x == 0 || x == wight - 1 || y == 0 || y == lenght - 1)
             {
                 vec.push_back(254);
             }
@@ -106,12 +101,13 @@ void draw()
                 cout << world[i][j];
             }
         }
-        cout << endl;   
+        cout << endl;
     }
     cout << "The Best Score: " << bScore << endl;
     cout << "Score: " << score;
     Sleep(200);
 }
+
 
 
 void player()
@@ -174,6 +170,13 @@ void control()
     default:
         break;
     }
+    for (int i = nTail - 1; i > 0; i--)
+    {
+        tailx[i] = tailx[i - 1];
+        taily[i] = taily[i - 1];
+    }
+    tailx[0] = x;
+    taily[0] = y;
 }
 
 void checkControl()
@@ -203,6 +206,7 @@ void fruit() {
         score += 10;
         fruitX = rand() % (wight-2) +1;
         fruitY = rand() % (lenght-2) +1;
+        nTail++;
     }
 
 }
@@ -233,4 +237,13 @@ void file()
         in.close();
     }
 
+}
+
+void tail()
+{
+    for (int i = 0; i < nTail; i++) {
+        if (tailx[i] == x && taily[i] == y) {
+            gameOver();
+        }
+    }
 }

@@ -9,6 +9,7 @@ void main()
 		checkControl();
 		control();
 		draw();
+		tail();
 		fruit();
 		file();
 		system("cls");
