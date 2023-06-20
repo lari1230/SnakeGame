@@ -25,8 +25,9 @@ dir direction = start;
 int checkX, checkXX, checkY, checkYY;
 
 int score = 0;
+int bScore;
 
-//bool gameOver = false;
+
 int wight = 25, lenght = 25;
 int x = wight / 2, y = lenght / 2;
 int fruitX = rand() % wight, fruitY = rand() % lenght;
@@ -107,6 +108,7 @@ void draw()
         }
         cout << endl;   
     }
+    cout << "The Best Score: " << bScore << endl;
     cout << "Score: " << score;
     Sleep(200);
 }
@@ -205,79 +207,30 @@ void fruit() {
 
 }
 
-//void shifr(int Score, int type)
-//{
-//    string locScore = to_string(Score);
-//    if (type == 1)
-//    {
-//        string shifrTemp = "";
-//        for (size_t i = 0; i < locScore.size(); i++)
-//        {
-//            switch (locScore[i])
-//            {
-//            case '1':
-//                shifrTemp += "qwe]";
-//                break;
-//            case '2':
-//                shifrTemp += "poi?";
-//                break;
-//            case '3':
-//                shifrTemp += "glh|";
-//                break;
-//            case '4':
-//                shifrTemp += "bcv]";
-//                break;
-//            case '5':
-//                shifrTemp += "tiy[";
-//                break;
-//            case '6':
-//                shifrTemp += "asdh?";
-//                break;
-//            case '7':
-//                shifrTemp += "klf.";
-//                break;
-//            case '8':
-//                shifrTemp += "gyudfe.";
-//                break;
-//            case '9':
-//                shifrTemp += "eryt}";
-//                break;
-//            case '0':
-//                shifrTemp += "oiqweq{";
-//                break;
-//            }
-//        }
-//        ofstream on;
-//        on.open("BestScore.bs");
-//        on << shifrTemp;
-//    }
-//    else if (type == 2)
-//    {
-//        ifstream in;
-//        in.open("BestScore.bs");
-//        if (in.is_open())
-//        {
-//            string temp, str,num;
-//            getline(in, str);
-//            for (size_t i = 0; i < str.size(); i++)
-//            {
-//                
-//                if (str[i] == '[' || str[i] == ']' || str[i] == '{' || str[i] == '}' || str[i] == '|' || str[i] == '.' || str[i] == ',' || str[i] == '?')
-//                {
-//                       
-//                }
-//                else
-//                {
-//                    temp += str[i];
-//                }
-//            }
-//        }
-//    }
-//}
 void file()
 {
-    ofstream on;
-    on.open("BestScore.bs", ios::app);
-   
+    ifstream in;
+    in.open("BestScore.bs");
+    
+    if (in.is_open())
+    {
+        string str;
+        
+        getline(in, str);
+        int temp = stoi(str);
+        if (score > temp)
+        {
+            bScore = temp;
+            in.close();
+            ofstream on;
+            on.open("BestScore.bs");
+            on << score;
+            on.close();
+            ifstream in;
+            in.open("BestScore.bs");
+        }
+        bScore = temp;
+        in.close();
+    }
 
 }

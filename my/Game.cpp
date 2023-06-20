@@ -3,14 +3,15 @@
 void main()
 {
 	srand(time(NULL));
-	/*while (true)
+	while (true)
 	{
 		player();
 		checkControl();
 		control();
 		draw();
 		fruit();
+		file();
 		system("cls");
-	}*/
-	//cout << "YOU LOSE!" << endl;
+	}
+	cout << "YOU LOSE!" << endl;
 }
