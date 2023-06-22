@@ -16,6 +16,7 @@ int checkY, checkYY, checkX, checkXX;
 int tailx[100], taily[100];
 int nTail;
 enum eDirecton { STOP, LEFT, RIGHT, UP, DOWN } dir;
+char a = 254;
 HANDLE hand = GetStdHandle(STD_OUTPUT_HANDLE);
 
 enum Color {
@@ -93,7 +94,7 @@ void Draw()
 {
     system("cls");
     for (int i = 0; i < width + 2; i++) {
-        cout << (char)254;
+        cout << a;
     }
     cout << endl;
 
@@ -103,7 +104,7 @@ void Draw()
         {
             if (j == 0) {
                 SetConsoleTextAttribute(hand, LightYellow);
-                cout << (char)254;
+                cout << a;
             }
             if (i == y && j == x) {
                 SetConsoleTextAttribute(hand, Green);
@@ -134,7 +135,7 @@ void Draw()
             }
 
             if (j == width - 1) {
-                cout << (char)254;
+                cout << a;
             }
         }
         cout << endl;
