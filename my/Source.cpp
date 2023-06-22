@@ -74,6 +74,7 @@ void File()
 
 void Setup()
 {
+    SetConsoleTextAttribute(hand, NavyBlue);
     cout << "  _________              __              ________" << endl;
     cout << " /   _____/ ____ _____  |  | __ ____    /  _____/_____    _____   ____" << endl;
     cout << " \\_____  \\ /    \\\\__  \\ |  |/ // __ \\  /   \\  ___\\__  \\  /     \\_/ __ \\" << endl;
@@ -94,6 +95,7 @@ void Draw()
 {
     system("cls");
     for (int i = 0; i < width + 2; i++) {
+        SetConsoleTextAttribute(hand, LightYellow);
         cout << a;
     }
     cout << endl;
@@ -135,6 +137,7 @@ void Draw()
             }
 
             if (j == width - 1) {
+                SetConsoleTextAttribute(hand, LightYellow);
                 cout << a;
             }
         }
@@ -258,6 +261,6 @@ void main()
         Input();
         Logic();
         File();
-        Sleep(50);
+        Sleep(100);
     }
 }
