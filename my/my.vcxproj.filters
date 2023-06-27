@@ -18,12 +18,12 @@
     <ClCompile Include="Game.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="SnakeGame.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameLib.h">
+    <ClInclude Include="Main.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>

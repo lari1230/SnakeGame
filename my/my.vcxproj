@@ -20,10 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="SnakeGame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameLib.h" />
+    <ClInclude Include="Main.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

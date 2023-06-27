@@ -11,7 +11,7 @@
 using namespace std;
 const int width = 20;
 const int height = 20;
-int x, y, fruitX, fruitY, score, bScore;
+int x, y, fruitX, fruitY, score, bScore, sleep, checkScore;
 int checkY, checkYY, checkX, checkXX;
 int tailx[100], taily[100];
 int nTail;
@@ -39,6 +39,8 @@ enum Color {
 };
 void GameOver()
 {
+    //Вывод проигроша, результата и лучшего результата
+    system("cls");
     SetConsoleTextAttribute(hand, Red);
     cout << "You Lose!\n" << endl;
     cout << "Your Score: " << score << endl;
@@ -46,13 +48,14 @@ void GameOver()
 }
 void File()
 {
+    //Сохранение и занесение в переменую bScore лучшего результата
     ifstream in;
     in.open("bestscore.bs");
-    
+
     if (in.is_open())
     {
         string str;
-        
+
         getline(in, str);
         int temp = stoi(str);
         if (score > temp)
@@ -74,6 +77,7 @@ void File()
 
 void Setup()
 {
+    //Отрисовка загрузки игры
     SetConsoleTextAttribute(hand, NavyBlue);
     cout << "  _________              __              ________" << endl;
     cout << " /   _____/ ____ _____  |  | __ ____    /  _____/_____    _____   ____" << endl;
@@ -83,17 +87,20 @@ void Setup()
     cout << "        \\/     \\/     \\/     \\/    \\/          \\/     \\/      \\/     \\/" << endl;
     cout << "\n                                  LOADING..." << endl;
     Sleep(5000);
-
+    //Заполнение переменых необходимых для игры
     dir = STOP;
     x = width / 2;
     y = height / 2;
     fruitX = rand() % width;
     fruitY = rand() % height;
     score = 0;
+    sleep = 200;
+    checkScore = 1;
 }
 void Draw()
 {
     system("cls");
+    //Отрисовка поля №1
     for (int i = 0; i < width + 2; i++) {
         SetConsoleTextAttribute(hand, LightYellow);
         cout << a;
@@ -104,20 +111,24 @@ void Draw()
     {
         for (int j = 0; j < width; j++)
         {
+            //Отрисовка поля №2
             if (j == 0) {
                 SetConsoleTextAttribute(hand, LightYellow);
                 cout << a;
             }
+            //Отрисовка головы змейки
             if (i == y && j == x) {
                 SetConsoleTextAttribute(hand, Green);
                 cout << "O";
                 SetConsoleTextAttribute(hand, LightYellow);
             }
+            //Отрисовка фрукта
             else if (i == fruitY && j == fruitX) {
                 SetConsoleTextAttribute(hand, Purple);
                 cout << "F";
                 SetConsoleTextAttribute(hand, LightYellow);
             }
+            //Отрисовка хвоста
             else
             {
                 bool print = false;
@@ -143,15 +154,18 @@ void Draw()
         }
         cout << endl;
     }
+    //Отрисовка поля №3
     for (int i = 0; i < width + 2; i++) {
         cout << (char)254;
     }
     cout << endl;
+    //Вывод результатов
     cout << "The Best Score: " << bScore << endl;
     cout << "Score: " << score << endl;
 }
 void Input()
 {
+    //Отслеживание нажатия и поворота змейки
     if (_kbhit())
     {
         switch (_getch())
@@ -166,14 +180,14 @@ void Input()
         case 'd':
             dir = RIGHT;
             checkX = 2;
- 
+
             checkY = 0;
             checkYY = 0;
             break;
         case 'w':
             dir = UP;
             checkY = 2;
-               
+
             checkX = 0;
             checkXX = 0;
             break;
@@ -192,6 +206,58 @@ void Input()
 }
 void Logic()
 {
+    //Увилечение сложности
+    if (checkScore == 1)
+    {
+        switch (score)
+        {
+        case 100:
+            sleep -= 20;
+            checkScore = 0;
+            break;
+        case 200:
+            sleep -= 20;
+            checkScore = 0;
+            break;
+        case 300:
+            sleep -= 20;
+            checkScore = 0;
+            break;
+        case 400:
+            sleep -= 20;
+            checkScore = 0;
+            break;
+        case 500:
+            sleep -= 20;
+            checkScore = 0;
+            break;
+        case 600:
+            sleep -= 20;
+            checkScore = 0;
+            break;
+        case 700:
+            sleep -= 20;
+            checkScore = 0;
+            break;
+        case 800:
+            sleep -= 20;
+            checkScore = 0;
+            break;
+        case 900:
+            sleep -= 20;
+            checkScore = 0;
+            break;
+        case 1000:
+            sleep -= 20;
+            checkScore = 0;
+            break;
+        default:
+            break;
+
+        }
+    }
+    if (score % 110 == 0) checkScore = 1;
+    //Движение хвоста
     for (int i = nTail - 1; i > 0; i--)
     {
         tailx[i] = tailx[i - 1];
@@ -200,6 +266,7 @@ void Logic()
     tailx[0] = x;
     taily[0] = y;
 
+    //Без остоновачное двежение змейки
     switch (dir)
     {
     case LEFT:
@@ -217,15 +284,16 @@ void Logic()
     default:
         break;
     }
-
+    //Проход через стены
     if (x >= width) x = 0; else if (x < 0) x = width - 1;
     if (y >= height) y = 0; else if (y < 0) y = height - 1;
-
+    //Смерть при столкнавении с хвостом
     for (int i = 0; i < nTail; i++) {
         if (tailx[i] == x && taily[i] == y) {
             GameOver();
         }
     }
+    //Увелечение хвоста
     if (x == fruitX && y == fruitY)
     {
         score += 10;
@@ -233,7 +301,7 @@ void Logic()
         fruitY = rand() % height;
         nTail++;
     }
-
+    //Смерть при обратном движение
     if (dir == DOWN && checkY == 2)
     {
         GameOver();
@@ -249,18 +317,5 @@ void Logic()
     else if (dir == RIGHT && checkXX == 1)
     {
         GameOver();
-   }
-
-}
-void main()
-{
-    Setup();
-    while (true)
-    {
-        Draw();
-        Input();
-        Logic();
-        File();
-        Sleep(100);
     }
 }

@@ -1,18 +1,14 @@
-//#include "GameLib.h"
-//
-//void main()
-//{
-//	srand(time(NULL));
-//	while (true)
-//	{
-//		player();
-//		checkControl();
-//		control();
-//		draw();
-//		tail();
-//		fruit();
-//		file();
-//		system("cls");
-//	}
-//	cout << "YOU LOSE!" << endl;
-//}
+#include "Main.h"
+
+void main()
+{
+    Setup();
+    while (true)
+    {
+        Draw();
+        Input();
+        Logic();
+        File();
+        Sleep(sleep);
+    }
+}
