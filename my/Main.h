@@ -125,7 +125,7 @@ void Draw()
             //Отрисовка фрукта
             else if (i == fruitY && j == fruitX) {
                 SetConsoleTextAttribute(hand, Purple);
-                cout << "F";
+                cout << "&";
                 SetConsoleTextAttribute(hand, LightYellow);
             }
             //Отрисовка хвоста
